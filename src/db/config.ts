@@ -1,6 +1,8 @@
 import knex from 'knex'
 
-// eslint-disable-next-line node/no-missing-require
-const config = require('../../knexfile').development
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const config = require('../../knexfile')
 
-export default knex(config)
+const dbEnv = process.env.DB_ENV || 'development'
+
+export default knex(config[dbEnv])

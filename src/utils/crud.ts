@@ -8,7 +8,7 @@ export type Id = number | string
 type Model = {
   findAll: () => QueryBuilder<any[]>
   findById: (id: Id) => QueryBuilder<any>
-  insert: (item: any) => Promise<any>
+  insert: (item: any) => Promise<[any]>
   update: (id: Id, item: any) => Promise<any>
   remove: (id: Id) => QueryBuilder<number>
 }

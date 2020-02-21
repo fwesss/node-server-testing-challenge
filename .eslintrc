@@ -8,6 +8,8 @@
     "import",
     "optimize-regex",
     // "functional",
+    "jest",
+    "jest-formatting",
     "@typescript-eslint",
     "@typescript-eslint/eslint-plugin"
   ],
@@ -17,6 +19,9 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "airbnb-base",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "plugin:jest-formatting/recommended",
     "eslint:recommended",
     "plugin:node/recommended",
     "plugin:@typescript-eslint/eslint-recommended",

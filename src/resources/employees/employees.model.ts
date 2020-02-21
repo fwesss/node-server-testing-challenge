@@ -17,10 +17,10 @@ export const findById = (id: Id): QueryBuilder<Employee> =>
     .where({ id: Number(id) })
     .first()
 
-export const insert = (employee: Omit<Employee, 'id'>): Promise<Employee> =>
+export const insert = (employee: Omit<Employee, 'id'>): Promise<[Employee]> =>
   db('employees')
     .insert(employee)
-    .then(([id]) => findById(id).first())
+    .then(([id]) => findById(id))
 
 export const update = (
   id: Id,
