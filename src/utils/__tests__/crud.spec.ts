@@ -1,3 +1,4 @@
+/* eslint-disable jest/expect-expect */
 import request from 'supertest'
 import server from '../../server/server'
 import db from '../../db/config'
@@ -106,7 +107,7 @@ describe('CRUD', () => {
         .expect(200)
     })
 
-    it('should respond with the Id of removed employee', async () => {
+    it('should respond with confirmation the employee was removed', async () => {
       await insert({ name: 'Tuna', department: 'Treats', tenure: 3 })
       await insert({ name: 'Scout', department: 'Bones', tenure: 2 })
 
