@@ -1,9 +1,18 @@
 import { Router } from 'express'
 
-import getEmployees from './employees.controllers'
+import controllers from './employees.controllers'
 
 const router = Router()
 
-router.route('/').get(getEmployees)
+router
+  .route('/')
+  .get(controllers.getMany)
+  .post(controllers.createOne)
+
+router
+  .route('/:id')
+  .get(controllers.getOne)
+  .put(controllers.updateOne)
+  .delete(controllers.removeOne)
 
 export default router

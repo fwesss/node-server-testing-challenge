@@ -1,25 +1,39 @@
 import { QueryBuilder } from 'knex'
 
+import { Id } from '../../utils/crud'
 import db from '../../db/config'
 
 export type Employee = {
-  id: number
+  id: Id
   name: string
   department: string
   tenure: number
 }
 
-export const find = (): QueryBuilder => db('employees').select('*')
+export const findAll = (): QueryBuilder<Employee[]> => db('employees')
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const findBy = (filter: { [key: string]: any }): QueryBuilder =>
+export const findById = (id: Id): QueryBuilder<Employee> =>
   db('employees')
-    .select('*')
-    .where(filter)
+    .where({ id: Number(id) })
+    .first()
 
-const insert = (user: Omit<Employee, 'id'>): Promise<Employee> =>
+export const insert = (employee: Omit<Employee, 'id'>): Promise<Employee> =>
   db('employees')
-    .insert(user)
-    .then(ids => findBy({ id: ids[0] }).first())
+    .insert(employee)
+    .then(([id]) => findById(id).first())
 
-export default { find, findBy, insert }
+export const update = (
+  id: Id,
+  employee: Omit<Employee, 'id'>
+): Promise<Employee> =>
+  db('employees')
+    .where({ id: Number(id) })
+    .update(employee)
+    .then(count => count > 0 && findById(id))
+
+export const remove = (id: Id): QueryBuilder<number> =>
+  db('employees')
+    .where('id', Number(id))
+    .del()
+
+export default { findAll, findById, insert, update, remove }
